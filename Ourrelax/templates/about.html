@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf8">
+<title>励志故事</title>
+
+<link href="/static/css/base.css" rel="stylesheet">
+<link href="/static/css/index.css" rel="stylesheet">
+<link href="/static/css/m.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/js/sb-admin-2.js">
+
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
+<script>
+window.onload = function ()
+{
+	var oH2 = document.getElementsByTagName("h2")[0];
+	var oUl = document.getElementsByTagName("ul")[0];
+	oH2.onclick = function ()
+	{
+		var style = oUl.style;
+		style.display = style.display == "block" ? "none" : "block";
+		oH2.className = style.display == "block" ? "open" : ""
+	}
+}
+</script>
+</head>
+<body style="background-color: papayawhip">
+<header>
+  <div class="tophead">
+   <div class="logo"><a href="/index/" style="font-size: 35px;color: gray">官网主页</a></div>
+    <div id="mnav">
+      <h2><span class="navicon"></span></h2>
+      <ul>
+        <li><a href="../index">网站首页</a></li>
+        <li><a href="../about">更多故事</a></li>
+
+
+      </ul>
+    </div>
+    <nav class="topnav" id="topnav">
+      <ul>
+        <li class="hometitle"><a href="/mypage2/">文章管理</a></li>
+        <li class="hometitle"><a href="/motivational/">励志故事</a></li>
+        <li class="hometitle"><a href="/morning/">清晨故事</a></li>
+        <li class="hometitle"><a href="/noon/">午后故事</a></li>
+        <li class="hometitle"><a href="/nighty_night/">傍晚故事</a></li>
+        <li class="hometitle"><a href="/share/">缘~分享</a></li>
+        <li class="hometitle"><a href="/login/">登出</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+<article>
+  <h1 class="t_nav"><span>您所进入的文章是{{ article.title }}</span></h1>
+  <div class="infos">
+    <div class="newsview" style="background-color: palegoldenrod">
+      <h3 class="news_title" style="text-align: center">{{ article.title }}</h3>
+      <div class="news_author"><span class="au01"></span><span class="au02">{{ article.author }}</span><span class="au03"></span></div>
+      <div class="tags"></div>
+      <div class="news_about">{{ article.description }}</div>
+      <div class="news_infos">{{ article.content }}<br></div>
+    </div>
+    <div class="share"> </div>
+    <div class="nextinfo">
+
+
+
+      <p><a href="/index/">返回主页</a></p>
+    </div>
+      <form action="#" method="post">
+          {% csrf_token %}
+          <p style="font-size: 20px;color: black;text-align: center">评论区</p>
+          <input type="text" name="text" style="width:600px;height: 40px">
+          <input type="submit" class="btn btn-success" value="提交">
+          {% for foo in comments %}
+          <li>第{{ foo.id }}楼：{{ foo.Text }}</li>
+          {% endfor %}
+      </form>
+
+
+
+    <div class="otherlink">
+
+    </div>
+
+  </div>
+  <div class="sidebar">
+    <div class="search">
+
+       <input name="keyboard" id="keyboard" class="input_text" placeholder="请输入文章名">
+      <input name="tbname" value="news" type="hidden">
+       <input name="submit" id="sousuo" class="input_submit" value="搜索" type="submit">
+
+    </div>
+   <div class="lmnav">
+      <h2 class="hometitle">栏目导航</h2>
+      <ul class="navbor">
+        <li>主页信息</li>
+        <li><a href="#">小说分享</a>
+          <ul>
+            <li><a href="/yanqin/">言情</a></li>
+            <li><a href="/chuanyue/">穿越</a></li>
+              <li><a href="/xianshi/">现实</a></li>
+              <li><a href="/riji/">日记</a></li>
+          </ul>
+        </li>
+        <li><a href="#">故事</a>
+          <ul>
+              <li><a href="/motivational">激励故事</a></li>
+              <li><a href="/morning/">清晨故事</a></li>
+              <li><a href="/noon/">午后故事</a></li>
+              <li><a href="/nighty_night/">傍晚故事</a></li>
+              <li><a href="/before_sleep/">睡前故事</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="links">
+      <h2 class="hometitle">友情链接</h2>
+      <ul>
+        <li><a href="http://www.baidu.com" title="百度合作商">百度</a></li>
+        <li><a href="http://www.ifeng.com" title="凤凰网站">凤凰</a></li>
+        <li><a href="http://www.gollen.com" title="谷歌合作商">谷歌</a></li>
+      </ul>
+    </div>
+    <div class="weixin">
+      <h2 class="hometitle">官方微信</h2>
+      <ul>
+        <img src="/static/images/WODEVX.jpg">
+        <script src="/static/js/jquery-2.1.1.min.js"></script>
+      </ul>
+    </div>
+  </div>
+</article>
+<div class="blank"></div>
+<footer>
+  <p><a href="/">故事驿站，一个你永远都愿意停驻的地方</a> <a href="/">蜀ICP备11002373号-1</a></p>
+</footer>
+<script src="/static/js/nav.js"></script>
+<script>
+     $(function () {
+        $("#sousuo").click(function () {
+
+            var a = $("#keyboard").val();
+            window.location = "/sousuo/"+a;
+
+        })
+
+    })
+</script>
+<script src="/static/js/jquery-2.1.1.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,298 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf8">
+<title><b>人生就是一场旅行</b></title>
+<link href="{% static 'css/base.css'%}" rel="stylesheet">
+<link href="/static/css/index.css" rel="stylesheet">
+<link href="/static/css/m.css" rel="stylesheet">
+
+
+<!--[if lt IE 9]>
+<script src="/static/js/modernizr.js"></script>
+<![endif]-->
+<script>
+window.onload = function ()
+{
+	var oH2 = document.getElementsByTagName("h2")[0];
+	var oUl = document.getElementsByTagName("ul")[0];
+	oH2.onclick = function ()
+	{
+		var style = oUl.style;
+		style.display = style.display == "block" ? "none" : "block";
+		oH2.className = style.display == "block" ? "open" : ""
+	}
+}
+</script>
+    <style>
+        .fenye1:hover{
+            background-color: #1e8ec5;
+        }
+    </style>
+</head>
+<script src="/static/js/jquery-2.1.1.min.js">
+</script>
+<body>
+<header >
+        <div class="tiaozhuanye" style="position: fixed;width: 1600px;height: 900px;background:rgba(77,65,19,.5);z-index: 9999;">
+        <div style="position: relative;width: 300px;height: 400px;left: 530px;top: 100px">
+        <div href="/login/" style="display: block;width: 300px;height: 400px"><img src="/static/images/2.jpg" style="width: 300px;height: 400px" alt=""></div>
+            <b style="position: absolute;top: 100px;left: 30px;font-family: 楷体;font-size: 30px">您现在身份是游客</b>
+            <p style="position: absolute;top: 160px;left: 35px;font-family: 楷体;font-size: 20px">点击<a href="/login/" style="color: #1e8ec5">登录</a>,可获得管理权限</p>
+            <p style="position: absolute;top: 200px;left: 35px;font-family: 楷体;font-size: 20px">点击<a href="/shouye1/" style="color: #1e8ec5">不登录</a>,将无法享受特权</p>
+
+
+
+
+    </div>
+        </div>
+
+
+  <div class="tophead" >
+
+    <div class="logo"><img src="/static/images/1100.png" alt="" style="width: 35px;height: 35px"><a href="./" style="color: black">故事驿站</a>
+    <span style="font-size: 17px;margin-left: 30px">每一次的快乐,都从一个故事开始</span>
+    </div>
+
+    <div id="mnav">
+
+      <h2><span class="navicon"></span></h2>
+
+        <li class="hometitle"><a href="../motivational">励志故事</a></li>
+        <li class="hometitle"><a href="../moring">清晨故事</a></li>
+        <li class="hometitle"><a href="../noon">午后故事</a></li>
+        <li class="hometitle"><a href="../nighty_night">傍晚故事</a></li>
+        <li class="hometitle"><a href="../before_sleep">睡前故事</a></li>
+          <li class="hometitle"><a href="../share" style="color: #009966">缘~分享</a></li>
+        <li class="hometitle"><a href="../login">登出</a></li>
+      </ul>
+
+    </div>
+    <nav class="topnav" id="topnav">
+      <ul>
+        <li class="hometitle"><a href="/mypage2/">文章管理</a></li>
+        <li class="hometitle" ><a href="../share" style="color: #1e8ec5">缘~分享</a></li>
+        <li class="hometitle"><a href="../morning">清晨故事</a></li>
+        <li class="hometitle"><a href="../noon">午后故事</a></li>
+        <li class="hometitle"><a href="../nighty_night">傍晚故事</a></li>
+        <li class="hometitle"><a href="../before_sleep">睡前故事</a></li>
+        <li class="hometitle"><a href="/logout/">登出</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="picshow">
+
+  <ul>
+    <li><a href="../yanqin/"><i><img src="/static/images/101.jpg"></i>
+      <div class="font">
+        <h3 class="">言情小说<br>你的名字,我的心事</h3>
+
+
+      </div>
+      </a></li>
+    <li><a href="../chuanyue/"><i><img src="/static/images/b02.jpg"></i>
+      <div class="font">
+          <h3>穿越小说<br>
+          我会为了你，与世界为敌
+          </h3>
+      </div>
+      </a></li>
+    <li><a href="../xianshi/"><i><img src="/static/images/102.jpg"></i>
+      <div class="font">
+          <h3>现实小说<br>
+          在逆境中重生
+          </h3>
+      </div>
+      </a></li>
+    <li><a href="../riji"><i><img src="/static/images/106.jpg"></i>
+      <div class="font">
+        <h3>日记<br>
+        爱情就像野草<br>
+        一岁一枯荣
+        </h3>
+      </div>
+      </a></li>
+    <li><a href="../share"><i><img style="height: 400px" src="/static/images/108.jpg"></i>
+      <div class="font">
+        <h3>缘の分享<br>
+        遇见更美，方得始终
+        </h3>
+      </div>
+      </a></li>
+  </ul>
+</div>
+<article>
+  <div class="blogs">
+    <div class="mt20"></div>
+       {% for foo in data %}
+        <li> <span class="blogpic"><a href="/new/{{ foo.id }}" style="display: block;width: 100%;height: 250px"><img src="/static/{{ foo.picture }}"></a></span>
+      <h3 class="blogtitle"><a href="/new/{{ foo.id }}">{{ foo.title }}</a></h3>
+      <div class="bloginfo">
+        <p>{{ foo.content }}</p>
+      </div>
+      <div class="autor"><span class="dtime">{{ foo.time }}</span><span>作者:{{ foo.author }}</span><span class="readmore"><a href="/new/{{ foo.id }}">阅读原文</a></span></div>
+    </li>
+      {% endfor %}
+    <div class="pagelist">
+        {% for foo in page_range %}
+            <a href="/index/?page={{ foo }}">{{ foo }}</a>
+        {% endfor %}
+
+
+
+       </div>
+{#{% verbatim myblock %}#}
+{#  <div class="blogs" id="bindData" style="height: 3600px;">#}
+{##}
+{##}
+{#        <li v-for="s in page_data"> <span class="blogpic"><a v-bind:href="'/new/'+s.id" style="display: block;width: 100%;height: 200px"><img v-bind:src="'/static'+s.picture"></a></span>#}
+{#      <h3 class="blogtitle"><a style="color: #1abc9c;" v-bind:herf="'/new/'+s.id">{{ s.title }}</a><span class="readmore"><a style="color: #1abc9c;" v-bind:href="'/new/'+s.id">阅读原文</a></span></h3>#}
+{#      <div class="bloginfo" >#}
+{#        <p style="height: 190px;display: block;overflow: hidden">{{ s.content }}</p>#}
+{#      </div><div class="autor"><span class="dtime">{{ s.time }}小说类型：{{ s.type }}</span></div>#}
+{#    </li>#}
+{#     <ul  style="height: 0;z-index: 999;float: right">#}
+{##}
+{#          <li v-for="p in page_range" class="fenye" style="width: 30px;height:30px;background-color:deeppink;text-align:center;line-height:30px;border: 1px black solid;float: left;" >#}
+{#          <a v-on:click="getPage(p)" class="fenye1" style="background-color: white;width: 30px;height: 30px;display: block;">{{ p }}</a>#}
+{#          </li>#}
+{##}
+{#        </ul>#}
+{##}
+{#{% endverbatim myblock %}#}
+
+  </div>
+  <div class="sidebar">
+    <div class="about">
+      <div class="avatar"> <img src="/static/images/111.jpg" alt=""> </div>
+      <p class="abname">今日主题</p>
+      <p class="abposition">人生</p>
+      <div class="abtext"> 人生就是一场旅行，在乎的不是目的地，而是沿途的风景。</div>
+    </div>
+    <div class="search">
+
+    <input name="keyboard" id="keyboard" class="input_text" placeholder="请输入文章名">
+    <input name="tbname" value="news" type="hidden">
+    <input name="submit" id="sousuo" class="input_submit" value="搜索" type="submit">
+
+
+
+    </div>
+
+    <div class="cloud" style="height: 277px">
+      <h2 class="hometitle">精品美文</h2>
+      <ul>
+        {% for foo in article_type %}
+            <a href="/new/{{ foo.id }}">{{ foo.title }}</a>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="paihang" style="height: 1164px">
+      <h2 class="hometitle" style="color: darkgray;">美文鉴赏</h2>
+      <ul>
+          {% for foo in article_type %}
+          <li><b><a href="new/{{ foo.id }}" target="_blank">【活动作品】{{ foo.title }}</a></b>
+               <p style="display: block;height: 108px"><i><img src="/static/{{ foo.picture }}"></i>{{ foo.description }}</p>
+          {% endfor %}
+
+
+      </ul>
+    </div>
+    <div class="paihang" style="height: 1102px">
+      <h2 class="hometitle">站长推荐</h2>
+      <ul>
+          <li>{% for foo in article_type %}
+          <b><a href="new/{{ foo.id }}" target="_blank"><p>【活动作品】{{ foo.title }}</p></a></b>
+              <p style="display: block;height: 100px;overflow: hidden"><i><img src="/static/{{ foo.picture }}"></i>{{ foo.description }}</p>
+          {% endfor %}
+          </li>
+        <li>
+      </ul>
+    </div>
+    <div class="links">
+      <h2 class="hometitle">友情链接</h2>
+      <ul>
+        <li><a href="http://www.baidu.com" title="百度合作商">百度</a></li>
+        <li><a href="http://www.ifeng.com" title="凤凰网站">凤凰</a></li>
+        <li><a href="http://www.gollen.com" title="谷歌合作商">谷歌</a></li>
+      </ul>
+    </div>
+    <div class="weixin">
+      <h2 class="hometitle">官方微信</h2>
+      <ul>
+        <img src="/static/images/WODEVX.jpg">
+      </ul>
+    </div>
+  </div>
+</article>
+<div class="blank"></div>
+<footer>
+  <p><a href="/">故事驿站，一个你永远都愿意停驻的地方</a> <a href="/">蜀ICP备11002373号-1</a></p>
+</footer>
+<script src="/static/js/nav.js"></script>
+<script src="/static/js/vue.js"></script>
+<script src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.min.js"></script>
+
+<script src="/static/js/dongtai.js"></script>
+
+<script>
+    $(function () {
+        $("#sousuo").click(function () {
+            var a = $("#keyboard").val();
+            window.location = "/sousuo/"+a;
+
+        })
+
+    })
+</script>
+
+</body>
+</html>
+<!--
+Vue.use(VueResource);
+var vue=new Vue({
+
+    el: "#bindData",
+    data: {
+        page_data: [],
+        page_range: []
+    },
+    created: function () {
+        var url = "/chaxun/";
+        this.$http.get(url).then(
+            function (data) {
+                this.page_data = data["data"]["data"];
+                this.page_range = data["data"]["page_range"].split(",");
+            },
+            function (error) {
+                console.log(error)
+            }
+        )
+    },
+    methods: {
+        getPage: function (page) {
+
+            url = "/chaxun/?page=" + page;
+            this.$http.get(url).then(
+                function (data) {
+                    this.page_data = data["data"]["data"];
+                    this.page_range = data["data"]["page_range"].split(",")
+                },
+                function (error) {
+                    console.log(error)
+                }
+            )
+        }
+
+    }
+})
+-->
+
+
+
+
+
+

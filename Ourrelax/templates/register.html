@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+  <title>注册页面</title>
+
+  <!-- Custom fonts for this template-->
+<script src="/static/js/jquery-2.1.1.min.js"></script>
+<link href="/static/css/base.css" rel="stylesheet">
+<link href="/static/css/index.css" rel="stylesheet">
+<link href="/static/css/m.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .left{
+            width: 60%;
+            float: left;
+            height: 800px;
+        }
+        image{
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+
+    <!-- Outer Row -->
+    <div>
+    <div  class="left">
+        <img src="/static/images/1032.png" alt="">
+
+    </div>
+            <div class="form_group" style="position: relative">
+
+        <div style="position: absolute;top: 75px;left: 250px"><b style="font-size: 50px;display: block;color: white">故事驿站</b></div>
+        <div style="position: absolute;font-size: 37px;text-shadow: black;left: 187px;top:200px;color: white"><p>遇见生活，看见生活</p>
+        </div>
+{#        <div style="position: absolute;left: 50px;top: 50px;background-color: white">#}
+        <form action="" method="post">
+
+            {% csrf_token %}
+            <div style=" position: absolute;;font-size: 20px;left: 900px;background-color: white;top:150px;width: 375px;height: 400px">
+                <div style="font-size: 38px;padding-left: 110px;padding-top: 30px"><b>注册界面</b></div>
+                <div style="padding-top: 40px;padding-left: 30px">
+                    <label for="#">姓名</label>
+                    <input type="username" id="name" name="username" style="width:200px;height: 40px;margin-left: 50px"><br>
+                </div>
+                <div style="padding-top:20px;padding-left: 30px">
+                    <label for="#">邮箱</label>
+                    <input type="email" id="email" name="email" style="width:200px;height: 40px;margin-left: 50px" onblur="getEmail()">
+                    <br>
+                    <br>
+
+                </div>
+                <div style="padding-left: 30px">
+                    <label for="#" >密码</label>
+                    <input type="password" id="password" name="password" style="width:200px;height: 40px;margin-left:50px" ><br>
+                </div>
+                <div style="padding-left: 132px;padding-top: 30px">
+{#                    <button type="submit" id="tijiao" style="height: 50px;width: 100px;solid-color: black"  >提交</button>#}
+                    <input type="submit" id="tijiao" style="height: 50px;width: 100px;solid-color: black" value="提交">
+                </div>
+            </div>
+        </form>
+        </div>
+    <script src="/static/js/nav.js"></script>
+    <script src="/static/js/dongtai.js"></script>
+    <script>
+    function getEmail() {
+            var email = ($("#email").val());
+            sendData = {
+                "email":email,
+                "csrfmiddlewaretoken":'{{ csrf_token }}'
+            };
+
+            $.ajax(
+            {
+                url:"/jiancha/",
+                type:"post",
+                data:sendData,
+                success:function (data) {
+                    alert(data['data'])
+
+                },
+                error:function (error) {
+                    alert(error);
+                    window.location = "/login/"
+
+                }
+            })}
+
+
+
+    </script>
+
+
+
+
+</body>
+</html>
+
+

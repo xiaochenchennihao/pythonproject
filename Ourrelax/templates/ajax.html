@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button"  id ="dianwo" value="点我吧">
+</body>
+<script src="/static/js/jquery-2.1.1.min.js"></script>
+<script>
+    $(function () {
+        $('#dianwo').click(function () {
+            $.ajax({
+                'url':'/xiaochen',
+                'dataType':'json'
+            }).success(function (data) {
+                if (data.xiaochen == 1)
+                    alert("66666")
+            })
+        })
+    })
+
+
+</script>
+</html>

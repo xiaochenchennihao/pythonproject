@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf8">
+<title>励志故事</title>
+
+<link href="/static/css/base.css" rel="stylesheet">
+<link href="/static/css/index.css" rel="stylesheet">
+<link href="/static/css/m.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
+
+<script>
+window.onload = function ()
+{
+	var oH2 = document.getElementsByTagName("h2")[0];
+	var oUl = document.getElementsByTagName("ul")[0];
+	oH2.onclick = function ()
+	{
+		var style = oUl.style;
+		style.display = style.display == "block" ? "none" : "block";
+		oH2.className = style.display == "block" ? "open" : ""
+	}
+}
+</script>
+</head>
+<body style="background-color: lightgreen">
+<header>
+  <div class="tophead">
+   <div class="logo"><a href="/index/" style="font-size: 35px;color: gray">故事驿站</a></div>
+    <div id="mnav">
+      <h2><span class="navicon"></span></h2>
+      <ul>
+        <li><a href="../index">网站首页</a></li>
+        <li><a href="../about">更多故事</a></li>
+
+
+      </ul>
+    </div>
+    <nav class="topnav" id="topnav">
+      <ul>
+
+        <li class="hometitle"><a href="../motivational">励志故事</a></li>
+        <li class="hometitle"><a href="../noon">午后故事</a></li>
+        <li class="hometitle"><a href="../nighty_night">傍晚故事</a></li>
+        <li class="hometitle"><a href="../before_sleep">睡前故事</a></li>
+        <li class="hometitle"><a href="../share">缘~分享</a></li>
+        <li class="hometitle"><a href="../login">登出</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+</div>
+<input type="text" name="chaxunneirong">
+<input type="submit" name="chaxunanniu">
+</div>
+<script src="/static/js/jquery-2.1.1.min.js"></script>
+<script src="/static/js/vue.js"></script>
+<script src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script src="/static/js/nav.js"></script>
+<script src="/static/js/dongtai.js"></script>
+<script>
+
+
+
+
+    {#$(#}
+    {##}
+    {#    function () {#}
+    {#        $.ajax(#}
+    {#        {#}
+    {#            url: "/mypage1/",#}
+    {#            type: "get",#}
+    {#            data: "",#}
+    {#            success: function (data) {#}
+    {#                p_range = data["page_range"].split(",");#}
+    {#                var vue = new Vue({#}
+    {#                    el: "#bindData",#}
+    {#                    data:{#}
+    {#                        page_data: data["data"],#}
+    {#                        page_range: p_range,#}
+    {#                    },#}
+    {#                    methods:{#}
+    {#                       xiangqin:function (page) {#}
+    {#                            url =  "/new/"+page;#}
+    {#                            console.log(url);#}
+    {#                            window.location = "/new/"+page;#}
+    {#                       },#}
+    {#                        shanchu:function (page) {#}
+    {#                           var a;#}
+    {#                           a = confirm("确定删除吗？")#}
+    {#                           if(a==true) window.location="/delete/"+page;#}
+    {##}
+    {#                        }#}
+    {##}
+    {##}
+    {#                    }#}
+    {#                })#}
+    {#            },#}
+    {#            error: function (error) {#}
+    {#                console.log(error)#}
+    {#            }#}
+    {##}
+    {#        }#}
+    {#    )#}
+    {#    }#}
+    {#);#}
+
+
+</script>
+
+
+</body>
+</html>

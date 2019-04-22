@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>登录页面</title>
+  <!-- Custom fonts for this template-->
+<link href="/static/css/base.css" rel="stylesheet">
+<link href="/static/css/index.css" rel="stylesheet">
+<link href="/static/css/m.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .left{
+            width: 60%;
+            float: left;
+            height: 800px;
+        }
+        image{
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+
+    <!-- Outer Row -->
+    <div>
+    <div  class="left" style="height: 628px">
+        <img src="/static/images/1033.png" alt="">
+
+    </div>
+    <div class="form_group" style="position: relative">
+
+        <div style="position: absolute;top: 75px;left: 250px"><b style="font-size: 50px;display: block;color: white">故事驿站</b></div>
+        <div style="position: absolute;font-size: 37px;text-shadow: black;left: 200px;top:200px;color: white"><p>只为遇见更好的你</p>
+        </div>
+{#        <div style="position: absolute;left: 50px;top: 50px;background-color: white">#}
+        <form action="" method="post" >
+
+            {% csrf_token %}
+            <div style=" position: absolute;;font-size: 20px;left: 900px;background: rgba(255,255,255,.6);top:150px;width: 375px;height: 400px">
+                <div style="font-size: 38px;padding-left: 110px;padding-top: 30px"><b>欢迎登陆</b></div>
+                <div style="padding-top: 70px;padding-left: 30px">
+                    <label for="#">邮箱</label>
+                    <input type="email" name="email" style="width:200px;height: 40px;margin-left: 50px"><br><br>
+                </div>
+            <div style="padding-left: 30px">
+                <label for="#" >密码</label>
+            <input type="password" name="password" style="width:200px;height: 40px;margin-left:50px" ><br>
+            </div>
+            <div style="padding-left: 30px;padding-top: 50px">
+                <input type="submit" style="height: 50px;width: 100px;solid-color: black" value="登录" >
+                <button id="zhuce" type="button" style="height: 50px;width: 100px;margin-left: 80px">注册</button>
+            </div>
+        </form>
+{#        </div>#}
+
+
+    </div>
+    </div>
+    <script src="/static/js/jquery-2.1.1.min.js"></script>
+    <script>
+        $(
+            function () {
+                $("#zhuce").click(
+                    function () {
+                         $(window).attr('location',"/register/");
+                    }
+                )
+            }
+        )
+    </script>
+
+
+</body>
+</html>
+
+

@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf8">
+<title>励志故事</title>
+
+<link href="/static/css/base.css" rel="stylesheet">
+<link href="/static/css/index.css" rel="stylesheet">
+<link href="/static/css/m.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
+<script>
+window.onload = function ()
+{
+	var oH2 = document.getElementsByTagName("h2")[0];
+	var oUl = document.getElementsByTagName("ul")[0];
+	oH2.onclick = function ()
+	{
+		var style = oUl.style;
+		style.display = style.display == "block" ? "none" : "block";
+		oH2.className = style.display == "block" ? "open" : ""
+	}
+}
+</script>
+</head>
+<body style="color: #38485A">
+<header>
+  <div class="tophead">
+   <div class="logo"><a href="/index/" style="font-size: 35px;color: gray">故事驿站</a></div>
+    <div id="mnav">
+      <h2><span class="navicon"></span></h2>
+      <ul>
+        <li><a href="../index">网站首页</a></li>
+        <li><a href="../about">更多故事</a></li>
+
+
+      </ul>
+    </div>
+    <nav class="topnav" id="topnav">
+      <ul>
+        <li class="hometitle"><a href="/mypage2/">文章管理</a></li>
+        <li class="hometitle"><a href="../motivational">励志故事</a></li>
+        <li class="hometitle"><a href="../morning">清晨故事</a></li>
+        <li class="hometitle"><a href="../noon">午后故事</a></li>
+        <li class="hometitle"><a href="../nighty_night">傍晚故事</a></li>
+        <li class="hometitle"><a href="../share">缘~分享</a></li>
+        <li class="hometitle"><a href="../login">登出</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<article>
+    <div style="font-size: 30px">睡前低语</div>
+    <h1 class="t_nav"><span>再坚强的人，也需要鼓励</span></h1>
+  <div class="blogs">
+    <div class="mt20"></div>
+       {% for foo in data %}
+        <li> <span class="blogpic"><a href="/new/{{ foo.id }}" style="display: block;width: 100%;height: 250px"><img src="/static/{{ foo.picture }}"></a></span>
+      <h3 class="blogtitle"><a href="/new/{{ foo.id }}">{{ foo.title }}</a></h3>
+      <div class="bloginfo">
+        <p>{{ foo.content }}</p>
+      </div>
+      <div class="autor"><span class="dtime">{{ foo.time }}</span><span>作者:{{ foo.author }}</span><span class="readmore"><a href="/new/{{ foo.id }}">阅读原文</a></span></div>
+    </li>
+      {% endfor %}
+    <div class="pagelist">
+        {% for foo in page_range %}
+            <a href="/morning/?page={{ foo }}">{{ foo }}</a>
+        {% endfor %}
+
+
+
+       </div>
+  </div>
+  <div class="sidebar">
+    <div class="search">
+
+       <input name="keyboard" id="keyboard" class="input_text" value="请输入文章名">
+      <input name="tbname" value="news" type="hidden">
+       <input name="submit" id="sousuo" class="input_submit" value="搜索" type="submit">
+
+    </div>
+     <div class="lmnav">
+      <h2 class="hometitle">栏目导航</h2>
+      <ul class="navbor">
+        <li>主页信息</li>
+        <li><a href="#">小说分享</a>
+          <ul>
+            <li><a href="/yanqin/">言情</a></li>
+            <li><a href="/chuanyue/">穿越</a></li>
+              <li><a href="/xianshi/">现实</a></li>
+              <li><a href="/riji/">日记</a></li>
+          </ul>
+        </li>
+        <li><a href="#">故事</a>
+          <ul>
+              <li><a href="/motivational">激励故事</a></li>
+              <li><a href="/morning/">清晨故事</a></li>
+              <li><a href="/noon/">午后故事</a></li>
+              <li><a href="/nighty_night/">傍晚故事</a></li>
+              <li><a href="/before_sleep/">睡前故事</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+   <div class="paihang" style="height: 1164px">
+      <h2 class="hometitle" style="color: darkgray;">美文鉴赏</h2>
+      <ul>
+          {% for foo in article1 %}
+          <li><b><a href="new/{{ foo.id }}" target="_blank">【活动作品】{{ foo.title }}</a></b>
+               <p style="display: block;height: 108px"><i><img src="/static/{{ foo.picture }}"></i>{{ foo.description }}</p>
+          {% endfor %}
+
+
+      </ul>
+    </div>
+    <div class="paihang" style="height: 1102px">
+      <h2 class="hometitle">站长推荐</h2>
+      <ul>
+          <li>{% for foo in article2 %}
+          <b><a href="new/{{ foo.id }}" target="_blank"><p>【活动作品】{{ foo.title }}</p></a></b>
+              <p style="display: block;height: 100px;overflow: hidden"><i><img src="/static/{{ foo.picture }}"></i>{{ foo.description }}</p>
+          {% endfor %}
+          </li>
+        <li>
+      </ul>
+    </div>
+    <div class="links">
+      <h2 class="hometitle">友情链接</h2>
+      <ul>
+        <li><a href="http://www.baidu.com" title="百度合作商">百度</a></li>
+        <li><a href="http://www.ifeng.com" title="凤凰网站">凤凰</a></li>
+        <li><a href="http://www.gollen.com" title="谷歌合作商">谷歌</a></li>
+      </ul>
+    </div>
+    <div class="weixin">
+      <h2 class="hometitle">官方微信</h2>
+      <ul>
+        <img src="/static/images/WODEVX.jpg">
+      </ul>
+    </div>
+  </div>
+</article>
+<div class="blank"></div>
+<footer>
+  <p><a href="/">故事驿站，一个你永远都愿意停驻的地方</a> <a href="/">蜀ICP备11002373号-1</a></p>
+</footer>
+<script src="/static/js/nav.js"></script>
+<script src="/static/js/nav.js"></script>
+<script src="/static/js/dongtai.js"></script>
+<script src="/static/js/jquery-2.1.1.min.js"></script>
+<script>
+    $(function () {
+        $("#sousuo").click(function () {
+
+            var a = $("#keyboard").val();
+            window.location = "/sousuo/"+a;
+
+        })
+
+    })
+</script>
+
+</body>
+</html>
+

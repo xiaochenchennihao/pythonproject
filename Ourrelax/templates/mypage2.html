@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf8">
+<title>励志故事</title>
+    <style>
+        ul li:hover{
+            background-color: #1e8ec5;
+        }
+    </style>
+<link rel="stylesheet" href="/static/css/sb-admin-2.css">
+<link href="/static/css/base.css" rel="stylesheet">
+<link href="/static/css/index.css" rel="stylesheet">
+<link href="/static/css/m.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
+
+<script>
+window.onload = function ()
+{
+	var oH2 = document.getElementsByTagName("h2")[0];
+	var oUl = document.getElementsByTagName("ul")[0];
+	oH2.onclick = function ()
+	{
+		var style = oUl.style;
+		style.display = style.display == "block" ? "none" : "block";
+		oH2.className = style.display == "block" ? "open" : ""
+	}
+}
+</script>
+</head>
+<body style="background-color: burlywood">
+<header>
+  <div class="tophead">
+   <div class="logo"><a href="/index/" style="font-size: 35px;color: gray">故事驿站</a></div>
+    <div id="mnav">
+      <h2><span class="navicon"></span></h2>
+      <ul>
+        <li><a href="../index">网站首页</a></li>
+        <li><a href="../about">更多故事</a></li>
+
+
+      </ul>
+    </div>
+    <nav class="topnav" id="topnav">
+      <ul>
+
+        <li class="hometitle"><a href="../motivational">励志故事</a></li>
+        <li class="hometitle"><a href="../noon">午后故事</a></li>
+        <li class="hometitle"><a href="../nighty_night">傍晚故事</a></li>
+        <li class="hometitle"><a href="../before_sleep">睡前故事</a></li>
+        <li class="hometitle"><a href="../share">缘~分享</a></li>
+        <li class="hometitle"><a href="../login">登出</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+<div style="position: relative">
+    {% verbatim myblock %}
+        <div id="bindData" style="background:rgba(255,255,255,.4);">
+        <p style="font-size: 25px;position: absolute;left: 150px;top:27px">文章管理界面</p>
+
+        <button v-on:click="daoxu"  class="btn badge-dark" type="button" id="daoxu" style="width: 100px;height: 50px;top: 20px;left:425px;position: absolute">时间查询</button>
+
+        <button v-on:click="xinzen" type="button" class="btn badge-light" id="xinzen" style=";width: 100px;height: 50px;margin-left: 100px;position: absolute;top:20px;left: 500px">新增文章</button>
+
+
+
+
+            <table style="text-align: center;position: absolute;left: 400px;top:150px;border: 1px black solid">
+                <thead>
+              <tr>
+                 <th style="font-size: 20px;">id号</th>
+                 <th style="font-size: 20px;">名称</th>
+                 <th style="font-size: 20px;">发表时间</th>
+                 <th style="font-size: 20px;">详情</th>
+                 <th style="font-size: 20px;">删除</th>
+
+
+              </tr>
+          </thead>
+          <tbody>
+                <tr v-for="s in page_data">
+
+                    <td style="font-size: 15px;width: 100px;height: 50px;">{{ s.id }}</td>
+                    <td style="font-size: 15px;width: 100px;height: 50px;">{{ s.title }}</td>
+                    <td style="font-size: 15px;width: 100px;height: 50px;">{{ s.time }}</td>
+
+
+                    <td style="font-size: 10px;width: 130px;height: 50px"><button class="btn btn-google" v-on:click="xiangqin(s.id)" type="button" id="xiangqing" style="width: 100px;height: 40px;background-color: skyblue">详情</button></td>
+                    <td style="font-size: 10px;width: 130px;height: 50px"><button class="btn btn-success" v-on:click="shanchu(s.id)" type="button" id="shanchu"  style="width: 100px;height: 40px;background-color: red">删除</button></td>
+
+
+              </tr>
+          </tbody>
+            </table>
+
+
+        <div>
+        <ul  style="position:absolute;left:450px;top: 475px;background-color: skyblue;width: 391px;height: 50px">
+          <li v-for="p in page_range" style="width: 78px;height:50px;text-align:center;line-height:50px;border: 1px black solid;float: left" >
+              <a style="width: 78px;display: block" v-on:click="getPage(p)">{{ p }}</a>
+          </li>
+        </ul>
+        </div>
+    {% endverbatim myblock %}
+</div>
+</div>
+<script src="/static/js/jquery-2.1.1.min.js"></script>
+<script src="/static/js/vue.js"></script>
+<script src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script src="/static/js/nav.js"></script>
+<script src="/static/js/dongtai.js"></script>
+<script src="/static/js/sb-admin-2.js"></script>
+<script>
+Vue.use(VueResource);
+var vue=new Vue({
+
+    el: "#bindData",
+    data: {
+        page_data: [],
+        page_range: []
+    },
+    created: function () {
+        var url = "/mypage1/";
+        this.$http.get(url).then(
+            function (data) {
+                this.page_data = data["data"]["data"];
+                this.page_range = data["data"]["page_range"].split(",");
+            },
+            function (error) {
+                console.log(error)
+            }
+        )
+    },
+    methods: {
+        getPage: function (page) {
+            console.log("1111111111111")
+            var url = "/mypage1/?page=" + page;
+            this.$http.get(url).then(
+                function (data) {
+                    this.page_data = data["data"]["data"];
+                    this.page_range = data["data"]["page_range"].split(",")
+                },
+                function (error) {
+                    console.log(error)
+                }
+            )
+        },
+        getDetail: function (id) {
+            url = "/stuDetail/" + id + "/";
+            window.location = url
+        },
+        xiangqin:function (page) {
+            url =  "/new/"+page;
+            console.log(url);
+            window.location = "/new/"+page;
+        },
+        shanchu:function (page) {
+           var a;
+           a = confirm("确定删除吗？")
+           if(a==true) window.location="/delete/"+page;
+
+        },
+        xinzen:function () {
+            window.location='/xinzen/'
+        },
+        daoxu:function () {
+            window.location='/mypage4/'
+        },
+        chaxun:function () {
+            window.location='/chaxun/'
+        }
+    }
+})
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

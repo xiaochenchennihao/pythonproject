@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf8">
+<title>励志故事</title>
+
+<link href="/static/css/base.css" rel="stylesheet">
+<link href="/static/css/index.css" rel="stylesheet">
+<link href="/static/css/m.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
+
+<script>
+window.onload = function ()
+{
+	var oH2 = document.getElementsByTagName("h2")[0];
+	var oUl = document.getElementsByTagName("ul")[0];
+	oH2.onclick = function ()
+	{
+		var style = oUl.style;
+		style.display = style.display == "block" ? "none" : "block";
+		oH2.className = style.display == "block" ? "open" : ""
+	}
+}
+</script>
+</head>
+<body style="background-color: sandybrown">
+<header>
+  <div class="tophead">
+   <div class="logo"><a href="/index/" style="font-size: 35px;color: gray">故事驿站</a></div>
+    <div id="mnav">
+      <h2><span class="navicon"></span></h2>
+      <ul>
+        <li><a href="../index">网站首页</a></li>
+        <li><a href="../about">更多故事</a></li>
+
+
+      </ul>
+    </div>
+    <nav class="topnav" id="topnav">
+      <ul>
+
+        <li class="hometitle"><a href="../motivational">励志故事</a></li>
+        <li class="hometitle"><a href="../noon">午后故事</a></li>
+        <li class="hometitle"><a href="../nighty_night">傍晚故事</a></li>
+        <li class="hometitle"><a href="../before_sleep">睡前故事</a></li>
+        <li class="hometitle"><a href="../share">缘~分享</a></li>
+        <li class="hometitle"><a href="../login">登出</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+<div style="position: relative"  >
+    <form method="post" id="tianjia" enctype="multipart/form-data" style="position: absolute;left:500px;top: 30px">
+    <p style="font-size: 20px">标题</p>
+    <input type="text" style="width: 400px;height: 40px" name="title" placeholder="标题" id="title">
+    <p style="font-size: 20px">类型</p>
+        <p>温馨提醒:类型限定(励志故事 、清晨故事 、午后故事 、黄昏故事 、傍晚故事 、睡前故事 、言情小说 、穿越小说 、现实小说 、日记 )</p>
+    <input type="text" style="width: 400px;height: 40px" name="type" placeholder="类型" id="type">
+    <p style="font-size: 20px">发表时间</p>
+    <input type="date" style="width: 400px;height: 40px" name="time" placeholder="时间" id="time">
+    <p style="font-size: 20px">内容简介</p>
+    <input type="text" style="width: 400px;height: 40px" name="description" placeholder="内容简介" id="description">
+    <p style="font-size: 20px">内容</p>
+    <input type="text" style="width: 400px;height: 40px" name="content" placeholder="具体内容" id="content">
+    <p style="font-size: 20px">图片</p>
+    <input type="file" style="width: 100px;height: 30px" name="img" placeholder="img" id="img">
+    <p style="font-size: 20px">您的姓名</p>
+    <input type="text" style="width: 100px;height: 20px" name="name" placeholder="您的姓名" id="name">
+
+    <button type="button" style="background-color: #3FB8AF;width: 100px;height: 60px;position: absolute;left: 308px" onclick="xinzen()">提交</button>
+    </form>
+
+</div>
+<script src="/static/js/jquery-2.1.1.min.js"></script>
+<script src="/static/js/vue.js"></script>
+<script src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script src="/static/js/nav.js"></script>
+<script src="/static/js/dongtai.js"></script>
+<script>
+    function xinzen() {
+        var formData = new FormData();
+        var shu = $("#tianjia").serializeArray();
+        var img=document.getElementById("img").files[0];
+
+        for(var d in shu){
+            formData.append(
+                shu[d]["name"],
+                shu[d]["value"]
+            )
+        }
+        formData.append("csrfmiddlewaretoken","{{ csrf_token }}");
+        formData.append("picture",img);
+
+        $.ajax(
+            {
+                url:"/zenjia/",
+                type:"post",
+                data:formData,
+                processData: false,  //是否严格检查请求格式
+                contentType: false, //是否严格检查请求内容类型
+                success:function (response) {
+                    alert("添加成功！")
+                },
+                error:function (error) {
+                    alert("添加失败！请按照我们的提示进行添加")
+                }
+            }
+        );
+
+
+
+    }
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

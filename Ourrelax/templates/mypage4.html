@@ -1,0 +1,220 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf8">
+<title>励志故事</title>
+    <style>
+        ul li a:hover{
+            background-color: #3FB8AF;
+        }
+    </style>
+<link rel="stylesheet" href="/static/css/sb-admin-2.css">
+<link href="/static/css/base.css" rel="stylesheet">
+<link href="/static/css/index.css" rel="stylesheet">
+<link href="/static/css/m.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
+
+<script>
+window.onload = function ()
+{
+	var oH2 = document.getElementsByTagName("h2")[0];
+	var oUl = document.getElementsByTagName("ul")[0];
+	oH2.onclick = function ()
+	{
+		var style = oUl.style;
+		style.display = style.display == "block" ? "none" : "block";
+		oH2.className = style.display == "block" ? "open" : ""
+	}
+}
+</script>
+</head>
+<body style="background-color:#f6c23e">
+<header>
+  <div class="tophead">
+   <div class="logo"><a href="/index/" style="font-size: 35px;color: gray">故事驿站</a></div>
+    <div id="mnav">
+      <h2><span class="navicon"></span></h2>
+      <ul>
+        <li><a href="../index">网站首页</a></li>
+        <li><a href="../about">更多故事</a></li>
+
+
+      </ul>
+    </div>
+    <nav class="topnav" id="topnav">
+      <ul>
+
+        <li class="hometitle"><a href="../motivational">励志故事</a></li>
+        <li class="hometitle"><a href="../noon">午后故事</a></li>
+        <li class="hometitle"><a href="../nighty_night">傍晚故事</a></li>
+        <li class="hometitle"><a href="../before_sleep">睡前故事</a></li>
+        <li class="hometitle"><a href="../share">缘~分享</a></li>
+        <li class="hometitle"><a href="../login">登出</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+<div>
+    {% verbatim myblock %}
+        <div id="bindData" style="background:rgba(255,255,255,.4);"><td style="font-size: 15px;width: 100px;height: 50px">
+        <button v-on:click="fanhui" class="btn btn-facebook" type="button" id="fanhui" style="width: 100px;height: 50px;margin-left: 100px;float: left">返回上页</button>
+
+        <br>
+
+
+            <table style="text-align: center;position: relative;left: 200px;border: 1px black solid">
+                <thead>
+              <tr>
+                 <th style="font-size: 20px;">序号</th>
+                 <th style="font-size: 20px;">名称</th>
+                 <th style="font-size: 20px;">发表时间</th>
+                 <th style="font-size: 20px;">详情</th>
+                 <th style="font-size: 20px;">删除</th>
+
+
+              </tr>
+          </thead>
+          <tbody>
+                <tr v-for="s in page_data">
+
+                    <td style="font-size: 15px;width: 100px;height: 50px">{{ s.id }}</td>
+                    <td style="font-size: 15px;width: 100px;height: 50px">{{ s.title }}</td>
+                    <td style="font-size: 15px;width: 100px;height: 50px">{{ s.time }}</td>
+
+
+                    <td style="font-size: 15px;width: 100px;height: 50px"><button v-on:click="xiangqin(s.id)" class="btn btn-dark" type="button" id="xiangqing" >详情</button></td>
+                    <td style="font-size: 15px;width: 100px;height: 50px"><button v-on:click="shanchu(s.id)" class="btn btn-group-toggle" type="button" id="shanchu"  >删除</button></td>
+
+
+              </tr>
+          </tbody>
+            </table>
+
+
+        <div>
+        <ul  style="position:absolute;left:450px;top: 475px;background-color: skyblue;width: 391px;height: 50px">
+          <li v-for="p in page_range" style="width: 78px;height:50px;text-align:center;line-height:50px;border: 1px black solid;float: left" >
+              <a style="width: 78px;height:50px;display: block" v-on:click="getPage(p)">{{ p }}</a>
+          </li>
+        </ul>
+        </div>
+    {% endverbatim myblock %}
+</div>
+</div>
+<script src="/static/js/jquery-2.1.1.min.js"></script>
+<script src="/static/js/vue.js"></script>
+<script src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script src="/static/js/nav.js"></script>
+<script src="/static/js/dongtai.js"></script>
+<script>
+Vue.use(VueResource);
+var vue=new Vue({
+
+    el: "#bindData",
+    data: {
+        page_data: [],
+        page_range: []
+    },
+    created: function () {
+        var url = "/mypage3/";
+        this.$http.get(url).then(
+            function (data) {
+                this.page_data = data["data"]["data"];
+                this.page_range = data["data"]["page_range"].split(",");
+            },
+            function (error) {
+                console.log(error)
+            }
+        )
+    },
+    methods: {
+        getPage: function (page) {
+            console.log("1111111111111")
+            var url = "/mypage3/?page=" + page;
+            this.$http.get(url).then(
+                function (data) {
+                    this.page_data = data["data"]["data"];
+                    this.page_range = data["data"]["page_range"].split(",")
+                },
+                function (error) {
+                    console.log(error)
+                }
+            )
+        },
+        getDetail: function (id) {
+            url = "/stuDetail/" + id + "/";
+            window.location = url
+        },
+        xiangqin:function (page) {
+            url =  "/new/"+page;
+            console.log(url);
+            window.location = "/new/"+page;
+        },
+        shanchu:function (page) {
+           var a;
+           a = confirm("确定删除吗？")
+           if(a==true) window.location="/delete/"+page;
+
+        },
+        fanhui:function () {
+
+            window.location='/mypage2/'
+        }
+    }
+})
+
+
+
+
+    {#$(#}
+    {##}
+    {#    function () {#}
+    {#        $.ajax(#}
+    {#        {#}
+    {#            url: "/mypage1/",#}
+    {#            type: "get",#}
+    {#            data: "",#}
+    {#            success: function (data) {#}
+    {#                p_range = data["page_range"].split(",");#}
+    {#                var vue = new Vue({#}
+    {#                    el: "#bindData",#}
+    {#                    data:{#}
+    {#                        page_data: data["data"],#}
+    {#                        page_range: p_range,#}
+    {#                    },#}
+    {#                    methods:{#}
+    {#                       xiangqin:function (page) {#}
+    {#                            url =  "/new/"+page;#}
+    {#                            console.log(url);#}
+    {#                            window.location = "/new/"+page;#}
+    {#                       },#}
+    {#                        shanchu:function (page) {#}
+    {#                           var a;#}
+    {#                           a = confirm("确定删除吗？")#}
+    {#                           if(a==true) window.location="/delete/"+page;#}
+    {##}
+    {#                        }#}
+    {##}
+    {##}
+    {#                    }#}
+    {#                })#}
+    {#            },#}
+    {#            error: function (error) {#}
+    {#                console.log(error)#}
+    {#            }#}
+    {##}
+    {#        }#}
+    {#    )#}
+    {#    }#}
+    {#);#}
+
+
+</script>
+
+
+</body>
+</html>
